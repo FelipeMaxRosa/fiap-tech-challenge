@@ -1,5 +1,4 @@
-version: '3'
-
+version: '3.3'
 networks:
   fastfoodius:
 
@@ -7,37 +6,41 @@ networks:
 services:
   mysql:
     image: mysql:8
+    container_name: mysql
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: fastfoodius
-      MYSQL_USER: fastfoodius
-      MYSQL_PASSWORD: fastfoodius
-    volumes:
-      - ./docker/mysql:/var/lib/mysql
+      MYSQL_USER: fastfoodius_user
+      MYSQL_PASSWORD: fastfoodius_pass
+      MYSQL_ROOT_PASSWORD: root
     networks:
       - fastfoodius
     ports:
-      - "3308:3306"
-
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+      - '3306:3306'
+    expose:
+      - '3306'
     volumes:
-      - ./:/app
-    environment:
-      NODE_ENV: development
-      DB_HOST: mysql
-      DB_USERNAME: fastfoodius
-      DB_PASSWORD: fastfoodius
-      DB_DATABASE: fastfoodius
-    depends_on:
-      - mysql
-    command: yarn dev
-    ports:
-      - "3000:3000"
-    networks:
-      - fastfoodius
+      # - ./docker/mysql:/var/lib/mysql
+      - ./src/database/db.sql:/docker-entrypoint-initdb.d/1.sql
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./:/app
+  #   environment:
+  #     NODE_ENV: development
+  #     DB_HOST: mysql
+  #     DB_USERNAME: fastfoodius_user
+  #     DB_PASSWORD: fastfoodius_pass
+  #     DB_DATABASE: fastfoodius
+  #   depends_on:
+  #     - mysql
+  #   command: yarn dev
+  #   ports:
+  #     - "3000:3000"
+  #   networks:
+  #     - fastfoodius
 
 volumes:
   mysql:
