@@ -3,7 +3,7 @@ USE `fastfoodius`;
 
 CREATE TABLE IF NOT EXISTS `fastfoodius`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`)
 )
