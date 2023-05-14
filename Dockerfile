@@ -13,4 +13,4 @@ RUN yarn global add ts-node
 # Copy source files
 COPY . .
 EXPOSE 8080
-CMD [ "node", "./src/server.ts" ]
+CMD [ "node", "./dist/server.js" ]
