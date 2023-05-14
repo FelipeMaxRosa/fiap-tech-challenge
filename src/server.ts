@@ -1,12 +1,12 @@
-import express from "express";
+import express from 'express';
 
 // Constants
 const PORT = 8080;
 
 // App
 const app = express();
-app.get("/", (req, res) => {
-  res.send("Hello World");
+app.get('/', (req, res) => {
+  res.send('Hello World');
 });
 
 app.listen(PORT, () => {
