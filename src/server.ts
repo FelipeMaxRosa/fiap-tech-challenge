@@ -1,13 +1,14 @@
-interface User {
-  name: string;
-  age: number;
-}
+import express from "express";
 
-function saveUser(user: User) {
-  console.log(user);
-}
+// Constants
+const PORT = 8080;
 
-saveUser({
-  age: 36,
-  name: "Felipe",
+// App
+const app = express();
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
+app.listen(PORT, () => {
+  console.log(`Running on PORT:${PORT}`);
 });
