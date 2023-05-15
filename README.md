@@ -2,6 +2,22 @@
 
 ## How to Build the App Image
 
+First you must to create the MySQL Docker Instance running:
+
+```
+docker compose up
+```
+
+To test it locally you just need to run:
+`yarn start` then you should see the messages on console:
+
+```
+Running on PORT:8080
+Connected to MySQL Server!
+```
+
+After that you must to create the node app image with:
+
 ```
 docker build . -t felipemaxrosa/fastfoodius-api
 ```
