@@ -1,6 +1,6 @@
 version: '3.3'
 networks:
-  fastfoodius:
+  fastnfoodius:
 
 
 services:
@@ -9,12 +9,12 @@ services:
     container_name: mysql
     restart: always
     environment:
-      MYSQL_DATABASE: fastfoodius
-      MYSQL_USER: fastfoodius_user
-      MYSQL_PASSWORD: fastfoodius_pass
+      MYSQL_DATABASE: fastnfoodius
+      MYSQL_USER: fastnfoodius_user
+      MYSQL_PASSWORD: fastnfoodius_pass
       MYSQL_ROOT_PASSWORD: root
     networks:
-      - fastfoodius
+      - fastnfoodius
     ports:
       - '3306:3306'
     expose:
@@ -31,16 +31,16 @@ services:
   #   environment:
   #     NODE_ENV: development
   #     DB_HOST: mysql
-  #     DB_USERNAME: fastfoodius_user
-  #     DB_PASSWORD: fastfoodius_pass
-  #     DB_DATABASE: fastfoodius
+  #     DB_USERNAME: fastnfoodius_user
+  #     DB_PASSWORD: fastnfoodius_pass
+  #     DB_DATABASE: fastnfoodius
   #   depends_on:
   #     - mysql
   #   command: yarn dev
   #   ports:
   #     - "3000:3000"
   #   networks:
-  #     - fastfoodius
+  #     - fastnfoodius
 
 volumes:
   mysql:
