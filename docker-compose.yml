@@ -1,13 +1,13 @@
-version: '3.3'
-networks:
-  fastnfoodius:
+version: '3'
 
+networks:
+  my-network:
+    driver: bridge
 
 services:
   mysql:
-    image: mysql:latest
+    image: mysql
     container_name: mysql
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: fastnfoodius
@@ -15,32 +15,24 @@ services:
       MYSQL_PASSWORD: fastnfoodius_pass
     ports:
       - '3306:3306'
-    networks:
-      - fastnfoodius
-    expose:
-      - '3306'
     volumes:
-      # - ./docker/mysql:/var/lib/mysql
       - ./src/database/db.sql:/docker-entrypoint-initdb.d/init.sql
-  # app:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - ./:/app
-  #   environment:
-  #     NODE_ENV: development
-  #     DB_HOST: mysql
-  #     DB_USERNAME: fastnfoodius_user
-  #     DB_PASSWORD: fastnfoodius_pass
-  #     DB_DATABASE: fastnfoodius
-  #   depends_on:
-  #     - mysql
-  #   command: yarn dev
-  #   ports:
-  #     - "3000:3000"
-  #   networks:
-  #     - fastnfoodius
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      timeout: 2s
+      retries: 10
+    networks:
+      - my-network
 
-volumes:
-  mysql:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    ports:
+      - "3000:3000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - my-network

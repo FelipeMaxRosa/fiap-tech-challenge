@@ -1,7 +1,7 @@
-CREATE SCHEMA IF NOT EXISTS `fastfoodius` DEFAULT CHARACTER SET utf8;
-USE `fastfoodius`;
+CREATE SCHEMA IF NOT EXISTS `fastnfoodius` DEFAULT CHARACTER SET utf8;
+USE `fastnfoodius`;
 
-CREATE TABLE IF NOT EXISTS `fastfoodius`.`users` (
+CREATE TABLE IF NOT EXISTS `fastnfoodius`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS `fastfoodius`.`users` (
 )
 ENGINE = InnoDB;
 
-INSERT INTO `fastfoodius`.`users` (name, email) VALUES ('felipe', 'felipemax.suporteti@gmail.com');
+INSERT INTO `fastnfoodius`.`users` (name, email) VALUES ('felipe', 'felipemax.suporteti@gmail.com');
