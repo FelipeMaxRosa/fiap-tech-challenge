@@ -9,19 +9,19 @@ services:
     container_name: mysql
     restart: always
     environment:
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: fastnfoodius
       MYSQL_USER: fastnfoodius_user
       MYSQL_PASSWORD: fastnfoodius_pass
-      MYSQL_ROOT_PASSWORD: root
-    networks:
-      - fastnfoodius
     ports:
       - '3306:3306'
+    networks:
+      - fastnfoodius
     expose:
       - '3306'
     volumes:
       # - ./docker/mysql:/var/lib/mysql
-      - ./src/database/db.sql:/docker-entrypoint-initdb.d/1.sql
+      - ./src/database/db.sql:/docker-entrypoint-initdb.d/init.sql
   # app:
   #   build:
   #     context: .
